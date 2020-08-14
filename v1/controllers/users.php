@@ -140,17 +140,17 @@ try {
 
   $res = new Response();
   $res->setHttpStatusCode(201);
-  $res->setMessage("User created");
+  $res->setMessage('User created');
   $res->setSuccess(true);
   $res->setData($returnData);
   $res->send();
   exit;
 
 } catch(PDOException $e) {
-  error_log("Database query error " . $e, 0);
+  error_log('Database query error ' . $e, 0);
   $res = new Response();
   $res->setHttpStatusCode(500);
-  $res->setMessage("Database query error");
+  $res->setMessage('Database query error');
   $res->setSuccess(false);
   $res->send();
   exit;

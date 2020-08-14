@@ -20,7 +20,7 @@ class Response {
      *
      * @var string
      */
-    private $messages = array();   
+    private $messages = [];   
     /**
      * data
      *

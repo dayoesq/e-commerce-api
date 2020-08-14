@@ -14,18 +14,18 @@
 declare(strict_types = 1);
 
 
-require_once "../config/Database.php";
-require_once "../models/User.php";
-require_once "../models/Response.php";
-require_once "../models/UserException.php";
+require_once '../config/Database.php';
+require_once '../models/User.php';
+require_once '../models/Response.php';
+require_once '../models/UserException.php';
 
 try {
   $readDB = Database::readDB();
 } catch(PDOException $e) {
-  error_log("Connection failed - " . $e, 0);
+  error_log('Connection failed - ' . $e, 0);
   $response = new Response();
   $response->setHttpStatusCode(500);
-  $response->setMessage("Connection failed");
+  $response->setMessage('Connection failed');
   $response->setSuccess(false);
   $response->send();
   exit;
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         if($rowCount !== 1) {
           $response = new Response();
           $response->setHttpStatusCode(404);
-          $response->setMessage("Not found");
+          $response->setMessage('Not found');
           $response->setSuccess(false);
           $response->send();
           exit;
@@ -59,22 +59,22 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
           $user->setDate($row['created_at']);
         }
         (array)$fetchedData = $user->returnUserAsArray();
-        (array)$data = array();
+        (array)$data = [];
         $data['rows_returned'] = $rowCount; 
         $data['users'] = $fetchedData;
         $response = new Response();
         $response->setHttpStatusCode(200);
         $response->setSuccess(true);
-        $response->setMessage("Successful");
+        $response->setMessage('Successful');
         $response->setData($data);
         $response->send();
         exit;
       } 
       catch(PDOException $e) {
-        error_log("Connection failed - " . $e->getMessage(), 0);
+        error_log('Connection failed - ' . $e->getMessage(), 0);
         (object)$response = new Response();
         $response->setHttpStatusCode(500);
-        $response->setMessage("Connection failed" . $e->getMessage());
+        $response->setMessage('Connection failed' . $e->getMessage());
         $response->setSuccess(false);
         $response->send();
         exit;
@@ -82,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     $response = new Response();
     $response->setHttpStatusCode(404);
-    $response->setMessage("The " . $_GET['id'] . " must be an integer");
+    $response->setMessage('The ' . $_GET['id'] . ' must be an integer');
     $response->setSuccess(false);
     $response->send();
     exit;

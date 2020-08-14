@@ -335,7 +335,7 @@ class User extends UserException
      */
     public function returnUserAsArray() 
     {
-        $user = array();
+        $user = [];
         $user['id'] = $this->getId();
         $user['firstname'] = $this->getFirstname();
         $user['lastname'] = $this->getLastname();
