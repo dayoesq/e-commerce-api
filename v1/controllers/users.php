@@ -17,7 +17,6 @@ declare(strict_types = 1);
 require_once "../config/Database.php";
 require_once "../models/User.php";
 require_once "../models/Response.php";
-require_once "../models/UserException.php";
 
 try {
   $writeDB = Database::writeDB();

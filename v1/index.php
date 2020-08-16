@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 date_default_timezone_set("Europe/Helsinki");
 
+$array = ['name' => 'Sola', 'age' => 48, 'school' => 'African Church Grammar School', 'town' => '', 'profession' => ''];
+
+function notAvail($empty) {
+  return $empty != null;
+}
+
+print_r(array_filter($array, 'notAvail'));
+
+
 
 
 // $date = date_create_from_format("l-m-Y", "thursday-03-2020");

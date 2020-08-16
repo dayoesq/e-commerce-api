@@ -2,9 +2,10 @@
 
 declare(strict_types = 1);
 
-require_once "UserException.php";
+require_once '../interfaces/Arrayable.php';
+require_once 'UserException.php';
 
-class User extends UserException 
+class User extends UserException implements Arrayable
 {    
     /**
      * id
@@ -60,8 +61,13 @@ class User extends UserException
      *
      * @var string
      */
-    private $date;
-        
+    private $createdAt;    
+    /**
+     * updatedAt
+     *
+     * @var string
+     */
+    private $updatedAt;  
     /**
      * __construct
      *
@@ -155,9 +161,19 @@ class User extends UserException
      *
      * @return string
      */
-    public function getDate() 
+    public function getCreatedAt() 
     {
-        return $this->date;
+        return $this->createdAt;
+    }
+    
+    /**
+     * getUpdatedAt
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
     
     /**
@@ -301,7 +317,7 @@ class User extends UserException
     public function setPhone(string $phone) 
     {
         (int)$min = 3; (int)$max = 14; $pattern = '/^((\+[1-9]+)$|([0-9]+)$)/';
-        if($phone !== null) {
+        if(!empty($phone)) {
             if(!preg_match($pattern, $phone)) {
                 throw new UserException("Invalid phone format");
             } elseif(strlen($phone) < $min) {
@@ -314,18 +330,33 @@ class User extends UserException
         throw new UserException("The phone is required");
     }
     
+       
     /**
-     * setDate
-     * Format the date to the specified format
-     * @param  string $date
+     * setCreatedAt
+     *
+     * @param  string $createdAt
      * @return string
      */
-    public function setDate($date) 
+    public function setCreatedAt(string $createdAt) 
     {
-        if(($date !== null) && !date_create_from_format('d-m-Y H:i', $date) || date_format(date_create_from_format('d-m-Y H:i', $date), 'd-m-Y H:i') !== $date) {
+        if(($createdAt !== null) && !date_create_from_format('d-m-Y H:i', $createdAt) || date_format(date_create_from_format('d-m-Y H:i', $createdAt), 'd-m-Y H:i') !== $createdAt) {
 			throw new UserException("Invalid date format");
 	  }
-	  return $this->date = $date;
+	  return $this->createdAt = $createdAt;
+    }
+        
+    /**
+     * setUpdatedAt
+     *
+     * @param  string|null $updatedAt
+     * @return string
+     */
+    public function setUpdatedAt(string $updatedAt) 
+    {
+        if(($updatedAt !== null) && !date_create_from_format('d-m-Y H:i', $updatedAt) || date_format(date_create_from_format('d-m-Y H:i', $updatedAt), 'd-m-Y H:i') !== $updatedAt) {
+			throw new UserException("Invalid date format");
+	  }
+	  return $this->updatedAt = $updatedAt;
     }
     
     /**
@@ -333,9 +364,9 @@ class User extends UserException
      *
      * @return array
      */
-    public function returnUserAsArray() 
+    public function toArray() 
     {
-        $user = [];
+        (array)$user = [];
         $user['id'] = $this->getId();
         $user['firstname'] = $this->getFirstname();
         $user['lastname'] = $this->getLastname();
@@ -343,7 +374,8 @@ class User extends UserException
         $user['password'] = $this->getPassword();
         $user['active'] = $this->getStatus();
         $user['phone'] = $this->getPhone();
-        $user['date'] = $this->getDate();
+        $user['created_at'] = $this->getCreatedAt();
+        $user['updated_at'] = $this->getUpdatedAt();
         return $user;
     }
 }
