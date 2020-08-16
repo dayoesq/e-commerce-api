@@ -1,0 +1,14 @@
+{
+  "name": "e-commerce-api/Ecommerce",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "dayo",
+      "email": ""
+    }
+  ],
+  "require": {
+  }
+}
