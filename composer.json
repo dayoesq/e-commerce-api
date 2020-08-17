@@ -5,10 +5,18 @@
   "license": "proprietary",
   "authors": [
     {
-      "name": "dayo",
-      "email": ""
+      "name": "Dayo",
+      "email": "dayoesq@live.com",
+      "role": "Developer"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "Ecommerce\\": "src/Ecommerce"
+    },
+    "classmap": []
+  },
   "require": {
+    "ext-pdo": "*"
   }
 }

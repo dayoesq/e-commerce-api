@@ -1,2 +1,6 @@
 *.htaccess
 */Database
+/.idea/
+/vendor/composer/
+/vendor/autoload.php
+/composer.lock
