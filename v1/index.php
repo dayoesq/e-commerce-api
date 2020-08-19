@@ -1,16 +1,16 @@
 <?php 
 
-declare(strict_types=1);
+// declare(strict_types=1);
+
 
 date_default_timezone_set("Europe/Helsinki");
 
-$array = ['name' => 'Sola', 'age' => 48, 'school' => 'African Church Grammar School', 'town' => '', 'profession' => ''];
+echo $_SERVER['SCRIPT_FILENAME'] . '<br>';
 
-function notAvail($empty) {
-  return $empty != null;
-}
+echo __CLASS__;
 
-print_r(array_filter($array, 'notAvail'));
+
+
 
 
 

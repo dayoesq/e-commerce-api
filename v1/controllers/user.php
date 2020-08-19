@@ -1,5 +1,4 @@
 <?php 
-
 /*
 |--------------------------------------------------------------------------
 | This route accepts POST, GET, PATCH, DELETE methods 
@@ -17,17 +16,13 @@ declare(strict_types = 1);
 require_once '../config/Database.php';
 require_once '../models/User.php';
 require_once '../models/Response.php';
+require_once '../functions/helper.php';
 
 try {
   $readDB = Database::readDB();
 } catch(PDOException $e) {
   error_log('Connection failed - ' . $e, 0);
-  $response = new Response();
-  $response->setHttpStatusCode(500);
-  $response->setMessage('Connection failed');
-  $response->setSuccess(false);
-  $response->send();
-  exit;
+  sendResponse(500, false, 'Connection failed');
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -43,12 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         $query->execute();
         $rowCount = $query->rowCount();
         if($rowCount !== 1) {
-          $response = new Response();
-          $response->setHttpStatusCode(404);
-          $response->setMessage('Not found');
-          $response->setSuccess(false);
-          $response->send();
-          exit;
+          sendResponse(404, false, 'Not found');
         }
         while($row = $query->fetch(PDO::FETCH_ASSOC)) {
           (object)$user = new User();
@@ -69,29 +59,13 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         (array)$data = [];
         $data['rows_returned'] = $rowCount; 
         $data['users'] = $realData;
-        $response = new Response();
-        $response->setHttpStatusCode(200);
-        $response->setSuccess(true);
-        $response->setMessage('Successful');
-        $response->setData($data);
-        $response->send();
-        exit;
+        sendResponse(200, true, 'Success', false, $data);
       } 
       catch(PDOException $e) {
         error_log('Connection failed - ' . $e->getMessage(), 0);
-        (object)$response = new Response();
-        $response->setHttpStatusCode(500);
-        $response->setMessage('Connection failed ' . $e->getMessage());
-        $response->setSuccess(false);
-        $response->send();
-        exit;
+        sendResponse(500, false, 'Connection failed ' . $e->getMessage(), false);
       }
     }
-    $response = new Response();
-    $response->setHttpStatusCode(404);
-    $response->setMessage('The ' . $_GET['id'] . ' must be an integer');
-    $response->setSuccess(false);
-    $response->send();
-    exit;
+    sendResponse(404, false, 'The ' . $_GET['id'] . ' must be an integer', false);
   }
 }

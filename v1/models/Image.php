@@ -3,9 +3,8 @@
 declare(strict_types = 1);
 
 require_once '../interfaces/Arrayable.php';
-require_once 'ImageImageException.php';
 
-class Image extends ImageException implements Arrayable{
+class Image extends Exception implements Arrayable{
   
   /**
    * id
@@ -151,7 +150,7 @@ class Image extends ImageException implements Arrayable{
   public function setId($id) 
   {
     if(($id !== null) && (!is_numeric($id) || $id <= 0 || $id > 92233720368547755807 || $this->id !== null)) {
-      throw new ImageException("Image id error");
+      throw new Exception("Image id error");
     }
     return $this->id = $id;
   }
@@ -164,11 +163,11 @@ class Image extends ImageException implements Arrayable{
    */
   public function setTitle(string $title) 
   { 
-    (int)$min = 1; (int)$max = 30;
+    $min = 1; $max = 30;
     if(strlen($title) < $min) {
-      throw new ImageException('Image title is required');
+      throw new Exception('Image title is required');
     } elseif(strlen($title) > $max) {
-      throw new ImageException('Image title is too long');
+      throw new Exception('Image title is too long');
     }
     return $this->title = $title;
   }
@@ -181,14 +180,14 @@ class Image extends ImageException implements Arrayable{
    */
   public function setFilename(string $filename)
   {
-    (int)$min = 1; (int)$max = 30;
+    $min = 1; $max = 30;
     (string)$pattern = '/^([a-zA-Z0-9]+)(.png|.jpeg|.gif.|jpg)$/';
     if(strlen($filename) < $min) {
-      throw new ImageException('The filename is required');
+      throw new Exception('The filename is required');
     } elseif(strlen($filename) > $max) {
-      throw new ImageException('The filename is too long');
+      throw new Exception('The filename is too long');
     } elseif(!preg_match($pattern, $filename)) {
-      throw new ImageException('Invalid file format');
+      throw new Exception('Invalid file format');
     }
     return $this->filename = $filename;
   }
@@ -201,11 +200,11 @@ class Image extends ImageException implements Arrayable{
    */
   public function setMimeType(string $mimeType)
   {
-    (int)$min = 1; (int)$max = 255;
+    $min = 1; $max = 255;
     if(strlen($mimeType) < $min) {
-      throw new ImageException('The mimetype is required');
+      throw new Exception('The mimetype is required');
     } elseif($mimeType > $max) {
-      throw new ImageException('The mimetype is too long');
+      throw new Exception('The mimetype is too long');
     } 
     return $this->mimeType = $mimeType;
   }
@@ -219,7 +218,7 @@ class Image extends ImageException implements Arrayable{
   public function setUserId(int $userId) 
   {
     if(($userId !== null) && (!is_numeric($userId) || $userId <= 0 || $userId > 92233720368547755807 || $this->userId !== null)) {
-      throw new ImageException("User id error");
+      throw new Exception("User id error");
     }
     return $this->userId = $userId;
   }
@@ -231,7 +230,7 @@ class Image extends ImageException implements Arrayable{
    */
   public function toArray()
   {
-    (array)$images = [];
+    $images = [];
     $images['id'] = $this->getId();
     $images['title'] = $this->getTitle();
     $images['filename'] = $this->getFilename();
