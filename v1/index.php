@@ -5,9 +5,20 @@
 
 date_default_timezone_set("Europe/Helsinki");
 
-echo $_SERVER['SCRIPT_FILENAME'] . '<br>';
+function check($arr) {
+  return $arr % 2;
+}
 
-echo __CLASS__;
+$num = [1, 2, 3, 4, 6];
+
+print_r(array_map('check', $num));
+
+
+
+
+
+
+
 
 
 

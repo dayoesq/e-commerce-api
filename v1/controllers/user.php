@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
         $realData = array_filter($fetchedData, function($realValue) {
           return $realValue !== null;
         });
-        (array)$data = [];
+        $data = [];
         $data['rows_returned'] = $rowCount; 
         $data['users'] = $realData;
         sendResponse(200, true, 'Success', false, $data);

@@ -1,6 +1,4 @@
-<?php 
-
-declare(strict_types = 1);
+<?php
 
 class Database
 {
@@ -26,23 +24,5 @@ class Database
         }
         return self::$readConnection;
     }    
-    /**
-     * writeDB
-     * Connection to write database
-     * 
-     */
-    public static function writeDB()
-    {
-        if(self::$writeConnection === null) {
-            $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$dbname;
-            self::$writeConnection = new PDO($dsn, self::$username, self::$password);
-            self::$writeConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$writeConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        }
-        return self::$writeConnection;
-    }
 
 }
-
-
-
