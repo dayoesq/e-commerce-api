@@ -80,7 +80,8 @@ class Database
         $operator = trim($operator);
         $query = implode(" ", ["SELECT", "%s FROM", "$this->table %s"]);
         list($content, $data) = $this->populate($wheres, ':', "%s = %s");
-        $query = sprintf($query, implode(', ', $keys), implode(" $operator ", $content));
+        $start = (!empty($content)) ? "WHERE " : "";
+        $query = sprintf($query, implode(', ', $keys), $start . implode(" $operator ", $content));
         $statement = $this->prepare($query);
         if (!$this->execute($statement, $data)) {
             return [];
