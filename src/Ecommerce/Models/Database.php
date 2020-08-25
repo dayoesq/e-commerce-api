@@ -28,7 +28,7 @@ class Database
      * @param string $class the class with namespace: App\\Models\\User.
      * @param string $table table name.
      */
-    public function __construct(string $class, string $table)
+    protected function __construct(string $class, string $table)
     {
         if (!isset(self::$db))
         {
