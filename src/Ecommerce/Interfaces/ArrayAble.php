@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
-interface Arrayable {
+namespace Ecommerce\Interfaces;
+
+interface ArrayAble {
   public function toArray();
 }
