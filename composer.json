@@ -1,7 +1,6 @@
 {
   "name": "ecommerceapi/ecommerce",
   "description": "description",
-  "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
