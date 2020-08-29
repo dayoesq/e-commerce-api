@@ -15,11 +15,6 @@
     },
     "classmap": []
   },
-  "require": {
-    "ext-pdo": "*",
-    "ext-json": "*",
-    "ext-apache": "*"
-  },
   "minimum-stability": "dev",
   "prefer-stable": false
 }
