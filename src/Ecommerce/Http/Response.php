@@ -1,50 +1,53 @@
-<?php 
+<?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-class Response {    
+namespace Ecommerce\Http;
+
+
+class Response {
     /**
      * success
      *
      * @var bool
      */
-    private $success;    
+    private bool $success;
     /**
      * httpStatusCode
      *
      * @var int
      */
-    private $httpStatusCode;    
+    private int $httpStatusCode;
     /**
      * messages
      *
      * @var string
      */
-    private $messages = [];   
+    private string $messages = "";
     /**
      * data
      *
      * @var mixed
      */
-    private $data;    
+    private $data;
     /**
      * toCache
      *
      * @var bool
      */
-    private $toCache = false;    
-    /**
-     * responseData
-     *
-     * @var array
-     */    
+    private bool $toCache = false;
     /**
      * responseData
      *
      * @var array
      */
-    private $responseData = [];
-    
+    /**
+     * responseData
+     *
+     * @var array
+     */
+    private array $responseData = [];
+
     /**
      * setSuccess
      *
@@ -54,7 +57,7 @@ class Response {
     public function setSuccess(bool $success) {
         $this->success = $success;
     }
-    
+
     /**
      * setHttpStatusCode
      *
@@ -64,17 +67,17 @@ class Response {
     public function setHttpStatusCode(int $httpStatusCode) {
         $this->httpStatusCode = $httpStatusCode;
     }
-    
+
     /**
      * setMessage
      *
-     * @param  string $message
+     * @param string $messages
      * @return void
      */
     public function setMessage(string $messages) {
         $this->messages[] = $messages;
     }
-    
+
     /**
      * setData
      *
@@ -84,7 +87,7 @@ class Response {
     public function setData($data) {
         $this->data = $data;
     }
-    
+
     /**
      * toCache
      *
@@ -94,7 +97,7 @@ class Response {
     public function toCache(bool $toCache) {
         $this->toCache = $toCache;
     }
-    
+
     /**
      * send
      *
@@ -111,7 +114,7 @@ class Response {
             $this->responseData['statusCode'] = 500;
             $this->responseData['success'] = false;
             $this->setMessage('Response creation error');
-            $this->responseData['message'] = $this->message;
+            $this->responseData['message'] = $this->messages;
         }
         http_response_code($this->httpStatusCode);
         $this->responseData['statusCode'] = $this->httpStatusCode;
