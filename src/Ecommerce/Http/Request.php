@@ -31,7 +31,12 @@ class Request
         $this->queries = $_GET;
         $this->contents = $this->loadContent();
     }
-
+    
+    /**
+     * loadContent
+     *
+     * @return array
+     */
     private function loadContent(): array
     {
         $method = $this->getMethod();

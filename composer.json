@@ -1,7 +1,6 @@
 {
-  "name": "e-commerce-api/Ecommerce",
+  "name": "ecommerceapi/ecommerce",
   "description": "description",
-  "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
@@ -20,5 +19,7 @@
     "ext-pdo": "*",
     "ext-json": "*",
     "ext-apache": "*"
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": false
 }
